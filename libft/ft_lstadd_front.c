@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acinca-f@student.42lisboa.com <acinca-f>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 15:13:00 by acinca-f@student  #+#    #+#             */
-/*   Updated: 2021/11/16 15:41:18 by acinca-f@student ###   ########.fr       */
+/*   Created: 2021/11/08 17:11:25 by acinca-f@student  #+#    #+#             */
+/*   Updated: 2021/11/08 17:11:30 by acinca-f@student ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "libft.h"
 
-# include <stdarg.h>
-# include <stdio.h>
-
-int	ft_printf(const char *args, ...);
-
-#endif
+void	ft_lstadd_front(t_list **lst, t_list *new)
+{
+	new->next = *lst;
+	*lst = new;
+}

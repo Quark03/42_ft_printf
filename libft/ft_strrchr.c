@@ -1,44 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acinca-f@student.42lisboa.com <acinca-f>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 15:14:27 by acinca-f@student  #+#    #+#             */
-/*   Updated: 2021/11/16 16:15:12 by acinca-f@student ###   ########.fr       */
+/*   Created: 2021/10/19 12:43:38 by acinca-f@student  #+#    #+#             */
+/*   Updated: 2021/10/25 09:54:29 by acinca-f@student ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "./libft/libft.h"
+#include "libft.h"
 
-int	is_flag(char f)
+char	*ft_strrchr(const char *s, int c)
 {
-	if (f == 'c')
-		return (1);
-	return (0);
-}
-
-int	ft_printf(const char *args, ...)
-{
-	char	*string;
 	int		i;
-	va_list	subs;
+	char	*res;
 
+	res = 0;
 	i = 0;
-	va_start(subs, args);
-	while (i < 10)
+	while (s[i] != '\0')
 	{
-		printf(">>>%c\n", va_arg(subs, int));
+		if (s[i] == (char)c)
+			res = (char *)s + i;
 		i++;
 	}
-	va_end(subs);
-	return (1);
+	if (c == '\0')
+		res = (char *)s + i;
+	return (res);
 }
 
-int	main(void)
-{
-	ft_printf("Hello World %c\n", 'a');
-	printf("Hello World %c\n", 'a');
-}
+// int	main(void)
+// {
+// 	printf("Res <%s>\n", ft_strrchr("Perter the rabbit", 'r'));
+// 	printf("Ori <%s>\n", strrchr("Perter the rabbit", 'r'));
+// }

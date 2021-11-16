@@ -1,44 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acinca-f@student.42lisboa.com <acinca-f>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 15:14:27 by acinca-f@student  #+#    #+#             */
-/*   Updated: 2021/11/16 16:15:12 by acinca-f@student ###   ########.fr       */
+/*   Created: 2021/10/19 09:57:01 by acinca-f@student  #+#    #+#             */
+/*   Updated: 2021/10/20 10:24:07 by acinca-f@student ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "./libft/libft.h"
+#include "libft.h"
 
-int	is_flag(char f)
+void	*ft_memset(void *s, int c, size_t len)
 {
-	if (f == 'c')
-		return (1);
-	return (0);
-}
+	unsigned char	*string;
 
-int	ft_printf(const char *args, ...)
-{
-	char	*string;
-	int		i;
-	va_list	subs;
-
-	i = 0;
-	va_start(subs, args);
-	while (i < 10)
+	string = (unsigned char *) s;
+	while (len-- > 0)
 	{
-		printf(">>>%c\n", va_arg(subs, int));
-		i++;
+		*(string++) = (unsigned char)c;
 	}
-	va_end(subs);
-	return (1);
+	return (s);
 }
 
-int	main(void)
-{
-	ft_printf("Hello World %c\n", 'a');
-	printf("Hello World %c\n", 'a');
-}
+// int	main(void)
+// {
+// 	char	dst1[10];
+// 	char	dst2[10];
+// 	int		chr = 'a';
+// 	int		len = 8;
+
+// 	printf("Res <%s>\n", ft_memset(dst1, chr, len));
+// 	printf("Ori <%s>\n", ft_memset(dst2, chr, len));
+// }

@@ -1,44 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acinca-f@student.42lisboa.com <acinca-f>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 15:14:27 by acinca-f@student  #+#    #+#             */
-/*   Updated: 2021/11/16 16:15:12 by acinca-f@student ###   ########.fr       */
+/*   Created: 2021/10/19 16:19:06 by acinca-f@student  #+#    #+#             */
+/*   Updated: 2021/10/26 16:04:49 by acinca-f@student ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "./libft/libft.h"
+#include "libft.h"
 
-int	is_flag(char f)
+void	*ft_calloc(size_t count, size_t size)
 {
-	if (f == 'c')
-		return (1);
-	return (0);
+	void	*ptr;
+
+	ptr = (void *)malloc(size * count);
+	if (!ptr)
+		return (0);
+	ft_bzero(ptr, count * size);
+	return (ptr);
 }
 
-int	ft_printf(const char *args, ...)
-{
-	char	*string;
-	int		i;
-	va_list	subs;
+// int	main(void)
+// {
+// 	char	*str;
 
-	i = 0;
-	va_start(subs, args);
-	while (i < 10)
-	{
-		printf(">>>%c\n", va_arg(subs, int));
-		i++;
-	}
-	va_end(subs);
-	return (1);
-}
-
-int	main(void)
-{
-	ft_printf("Hello World %c\n", 'a');
-	printf("Hello World %c\n", 'a');
-}
+// 	str = calloc(4, sizeof(char));
+// 	str = "ABCD";
+// 	printf("String <%s>\n", str);
+// }

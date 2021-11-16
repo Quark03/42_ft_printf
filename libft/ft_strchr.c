@@ -1,44 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acinca-f@student.42lisboa.com <acinca-f>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 15:14:27 by acinca-f@student  #+#    #+#             */
-/*   Updated: 2021/11/16 16:15:12 by acinca-f@student ###   ########.fr       */
+/*   Created: 2021/10/19 12:37:51 by acinca-f@student  #+#    #+#             */
+/*   Updated: 2021/10/25 09:49:37 by acinca-f@student ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "./libft/libft.h"
+#include "libft.h"
 
-int	is_flag(char f)
+char	*ft_strchr(const char *s, int c)
 {
-	if (f == 'c')
-		return (1);
+	int	i;
+
+	i = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] == (char)c)
+			return ((char *)s + i);
+		i++;
+	}
+	if (c == '\0')
+		return ((char *)s + i);
 	return (0);
 }
 
-int	ft_printf(const char *args, ...)
-{
-	char	*string;
-	int		i;
-	va_list	subs;
-
-	i = 0;
-	va_start(subs, args);
-	while (i < 10)
-	{
-		printf(">>>%c\n", va_arg(subs, int));
-		i++;
-	}
-	va_end(subs);
-	return (1);
-}
-
-int	main(void)
-{
-	ft_printf("Hello World %c\n", 'a');
-	printf("Hello World %c\n", 'a');
-}
+// int	main(void)
+// {
+// 	printf("Res <%s>\n", ft_strchr("Perter the rabbit", 'r'));
+// 	printf("Ori <%s>\n", strchr("Perter the rabbit", 'r'));
+// }

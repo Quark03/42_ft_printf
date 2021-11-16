@@ -1,44 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acinca-f@student.42lisboa.com <acinca-f>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 15:14:27 by acinca-f@student  #+#    #+#             */
-/*   Updated: 2021/11/16 16:15:12 by acinca-f@student ###   ########.fr       */
+/*   Created: 2021/10/19 16:24:10 by acinca-f@student  #+#    #+#             */
+/*   Updated: 2021/10/25 10:00:14 by acinca-f@student ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "./libft/libft.h"
+#include "libft.h"
 
-int	is_flag(char f)
+char	*ft_strdup(const char *s1)
 {
-	if (f == 'c')
-		return (1);
-	return (0);
-}
-
-int	ft_printf(const char *args, ...)
-{
-	char	*string;
 	int		i;
-	va_list	subs;
+	char	*dest;
 
+	dest = malloc(sizeof(char) * ft_strlen(s1) + 1);
+	if (!dest)
+		return (0);
 	i = 0;
-	va_start(subs, args);
-	while (i < 10)
+	while (s1[i] != '\0')
 	{
-		printf(">>>%c\n", va_arg(subs, int));
+		dest[i] = s1[i];
 		i++;
 	}
-	va_end(subs);
-	return (1);
+	dest[i] = '\0';
+	return (dest);
 }
 
-int	main(void)
-{
-	ft_printf("Hello World %c\n", 'a');
-	printf("Hello World %c\n", 'a');
-}
+// int	main(void)
+// {
+// 	char	src[] = "My Friends";
+// 	char	*dst1;
+// 	char	*dst2;
+
+// 	dst1 = ft_strdup(src);
+// 	dst2 = strdup(src);
+// 	printf("Res <%s>\nOri <%s>\n", dst1, dst2);
+// }

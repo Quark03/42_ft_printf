@@ -1,44 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acinca-f@student.42lisboa.com <acinca-f>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 15:14:27 by acinca-f@student  #+#    #+#             */
-/*   Updated: 2021/11/16 16:15:12 by acinca-f@student ###   ########.fr       */
+/*   Created: 2021/10/19 09:28:31 by acinca-f@student  #+#    #+#             */
+/*   Updated: 2021/10/20 09:47:37 by acinca-f@student ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-#include "./libft/libft.h"
+#include "libft.h"
 
-int	is_flag(char f)
+int	ft_isdigit(int c)
 {
-	if (f == 'c')
+	if (c >= 48 && c <= 57)
 		return (1);
 	return (0);
 }
 
-int	ft_printf(const char *args, ...)
-{
-	char	*string;
-	int		i;
-	va_list	subs;
-
-	i = 0;
-	va_start(subs, args);
-	while (i < 10)
-	{
-		printf(">>>%c\n", va_arg(subs, int));
-		i++;
-	}
-	va_end(subs);
-	return (1);
-}
-
-int	main(void)
-{
-	ft_printf("Hello World %c\n", 'a');
-	printf("Hello World %c\n", 'a');
-}
+// int	main(void)
+// {
+// 	printf("Res <%d> <0> \n", ft_isdigit('g'));
+// 	printf("Res <%d> <0> \n", ft_isdigit('K'));
+// 	printf("Res <%d> <0> \n", ft_isdigit('\n'));
+// 	printf("Res <%d> <0> \n", ft_isdigit('%'));
+// 	printf("Res <%d> <1> \n", ft_isdigit('4'));
+// }
