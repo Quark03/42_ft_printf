@@ -6,7 +6,7 @@
 /*   By: acinca-f@student.42lisboa.com <acinca-f>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 15:14:27 by acinca-f@student  #+#    #+#             */
-/*   Updated: 2021/11/16 16:15:12 by acinca-f@student ###   ########.fr       */
+/*   Updated: 2021/11/17 10:06:51 by acinca-f@student ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,28 @@ int	is_flag(char f)
 	return (0);
 }
 
-int	ft_printf(const char *args, ...)
+int	ft_printf(const char *format, ...)
 {
-	char	*string;
+	va_list	args;
+	char	*str;
 	int		i;
-	va_list	subs;
 
 	i = 0;
-	va_start(subs, args);
-	while (i < 10)
+	va_start(args, format);
+	while (format[i])
 	{
-		printf(">>>%c\n", va_arg(subs, int));
-		i++;
+		if (format[i] == '%' && is_flag(format[i + 1]))
+		{
+			str = va_arg(args, char *);
+			ft_putchar_fd(*str, 0);
+		}
+		else
+		{
+			ft_putchar_fd(format[i], 0);
+			i++;
+		}
 	}
-	va_end(subs);
+	va_end(args);
 	return (1);
 }
 
