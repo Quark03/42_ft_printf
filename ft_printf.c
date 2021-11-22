@@ -13,27 +13,39 @@
 #include "ft_printf.h"
 #include "./libft/libft.h"
 
-int	is_flag(char f)
+int is_flag(char f)
 {
 	if (f == 'c')
 		return (1);
 	return (0);
 }
 
-int	ft_printf(const char *format, ...)
+//str = va_arg(args, char *);
+
+void flag_handler(va_list args, char flag)
 {
-	va_list	args;
-	char	*str;
-	int		i;
+	(void)args;
+	if (flag == '%')
+		ft_putchar_fd('%', 0);
+	else if (flag == 'c')
+		ft_putchar_fd(va_arg(args, int), 0);
+	else if (flag == 's')
+		ft_putstr_fd(va_arg(args, char *), 0);
+}
+
+int ft_printf(const char *format, ...)
+{
+	va_list args;
+	int i;
 
 	i = 0;
 	va_start(args, format);
 	while (format[i])
 	{
-		if (format[i] == '%' && is_flag(format[i + 1]))
+		if (format[i] == '%')
 		{
-			str = va_arg(args, char *);
-			ft_putchar_fd(*str, 0);
+			flag_handler(args, format[i + 1]);
+			i += 2;
 		}
 		else
 		{
@@ -45,8 +57,13 @@ int	ft_printf(const char *format, ...)
 	return (1);
 }
 
-int	main(void)
+int main(void)
 {
-	ft_printf("Hello World %c\n", 'a');
-	printf("Hello World %c\n", 'a');
+	printf("---- CHAR ----\n");
+	ft_printf("Hello %corld\n", 'W');
+	printf("Hello %corld\n", 'W');
+	printf("---- STRING ----\n");
+	ft_printf("Hello %s\n", "World");
+	printf("Hello %s\n", "World");
+	printf("---- NUMBER ----\n");
 }
