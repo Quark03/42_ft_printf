@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printf_counters.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acinca-f@student.42lisboa.com <acinca-f>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/03 15:13:00 by acinca-f@student  #+#    #+#             */
-/*   Updated: 2021/11/23 09:52:35 by acinca-f@student ###   ########.fr       */
+/*   Created: 2021/11/23 09:46:16 by acinca-f@student  #+#    #+#             */
+/*   Updated: 2021/11/23 09:51:51 by acinca-f@student ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include "libft/libft.h"
-# include <stdarg.h>
-# include <stdio.h>
-# include <limits.h>
+int	ft_hexlen(int nbr)
+{
+	static int	c;
 
-int		ft_printf(const char *args, ...);
-void	ft_putunsigned(unsigned int nbr, int fd);
-void	ft_puthex_fd(int nbr, int to_upper, int fd);
-int		ft_hexlen(int nbr);
-
-#endif
+	if (nbr < 0)
+		nbr = UINT_MAX + nbr + 1;
+	else
+		nbr = (unsigned int) nbr;
+	if (nbr > 16)
+	{
+		c++;
+		return (ft_hexlen(nbr / 16));
+	}
+	else
+		return (1);
+}

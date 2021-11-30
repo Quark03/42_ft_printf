@@ -6,11 +6,13 @@
 #    By: acinca-f@student.42lisboa.com <acinca-f>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/03 15:10:24 by acinca-f@student  #+#    #+#              #
-#    Updated: 2021/11/03 15:11:54 by acinca-f@student ###   ########.fr        #
+#    Updated: 2021/11/23 09:56:39 by acinca-f@student ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = ft_printf.c  \
+	ft_printf_utils.c \
+	ft_printf_counters.c \
 	libft/ft_atoi.c \
 	libft/ft_bzero.c \
 	libft/ft_calloc.c \
