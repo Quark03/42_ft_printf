@@ -1,7 +1,0 @@
-printfTester
-
-*.out
-*.sh
-**/*.o;
-*.a;
-.idea
