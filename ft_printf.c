@@ -6,44 +6,23 @@
 /*   By: acinca-f@student.42lisboa.com <acinca-f>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/03 15:14:27 by acinca-f@student  #+#    #+#             */
-/*   Updated: 2021/11/23 12:14:17 by acinca-f@student ###   ########.fr       */
+/*   Updated: 2021/12/06 08:55:26 by acinca-f@student ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	is_flag(char f)
+int	flag_handler(va_list args, char flag)
 {
-	if (f == 'c')
-		return (1);
-	return (0);
-}
+	int	len;
 
-//str = va_arg(args, char *);
-
-int	length_handler(va_list args, char flag)
-{
-	if (flag == '%' || flag == 'c')
-		return (1);
-	else if (flag == 's')
-		return (ft_strlen(va_arg(args, char *)));
-	else if (flag == 'd' || flag == 'i')
-		return (ft_strlen(ft_itoa(va_arg(args, int))));
-	else if (flag == 'u')
-		return (ft_strlen(ft_itoa(va_arg(args, int))));
-	else if (flag == 'x' || flag == 'X')
-		return (ft_hexlen(va_arg(args, unsigned int)));
-	return (0);
-}
-
-void	flag_handler(va_list args, char flag)
-{
+	len = 0;
 	if (flag == '%')
-		ft_putchar_fd('%', 0);
+		len += ft_putchar_fd('%', 1);
 	else if (flag == 'c')
-		ft_putchar_fd((char)va_arg(args, void *), 1);
+		len += print_char((char) va_arg(args, void *));
 	else if (flag == 's')
-		ft_putstr_fd(va_arg(args, char *), 1);
+		ft_putstring(va_arg(args, char *));
 	else if (flag == 'd' || flag == 'i')
 		ft_putnbr_fd(va_arg(args, int), 1);
 	else if (flag == 'u')
@@ -52,6 +31,7 @@ void	flag_handler(va_list args, char flag)
 		ft_puthex_fd(va_arg(args, unsigned int), 0, 1);
 	else if (flag == 'X')
 		ft_puthex_fd(va_arg(args, unsigned int), 1, 1);
+	return (len);
 }
 
 int	ft_printf(const char *format, ...)
@@ -59,38 +39,38 @@ int	ft_printf(const char *format, ...)
 	va_list	args;
 	int		i;
 	int		cc[1];
+	char	*ptr;
 
 	i = 0;
 	*cc = 0;
 	va_start(args, format);
+	ptr = (char *)format;
 	while (format[i])
 	{
-		if (format[i] == '%')
-		{
-			flag_handler(args, format[i + 1]);
-			*cc += length_handler(args, format[i + 1]);
-			i += 1;
-		}
+		if (*ptr != '%')
+			*cc += ft_putchar_fd(ptr[0], 1);
 		else
 		{
-			ft_putchar_fd(format[i], 0);
-			++*cc;
+			*cc += flag_handler(args, ptr[1]);
+			ptr++;
 		}
 		i++;
+		ptr++;
 	}
 	va_end(args);
 	return (*cc);
 }
 
-int	main(void)
-{
-	int	a;
-	int	b;
+// int	main(void)
+// {
+// 	int	a;
+// 	int	b;
 
-	a = ft_printf(" %c", '0');
-	b = printf(" %c", '0');
-	printf("Length %d == %d\n", b, a);
-}
+// 	a = ft_printf("Hello %s\n", "World");
+// 	printf("\n---\n");
+// 	b = printf("Hello %s\n", "World");
+// 	printf("Length %d == %d\n", b, a);
+// }
 
 // 	printf("---- STRING ----\n");
 // 	a = ft_printf("Hello %s\n", "World");
